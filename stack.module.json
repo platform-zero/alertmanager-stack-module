@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "alertmanager",
+  "repo": "alertmanager-stack-module",
+  "runtimeId": "alertmanager",
+  "lifecycle": "active",
+  "dependencies": [
+    "prometheus",
+    "stack-foundation"
+  ],
+  "overlays": [
+    "stack.compose/alertmanager.yml",
+    "stack.config/alertmanager"
+  ]
+}
