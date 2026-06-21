@@ -20,7 +20,8 @@
   "overlays": [
     "stack.compose/alertmanager.yml",
     "stack.config/alertmanager",
-    "stack.containers/test-runner/playwright-tests/tests/deep/forward-auth/alertmanager.spec.ts"
+    "stack.containers/test-runner/playwright-tests/tests/deep/forward-auth/alertmanager.spec.ts",
+    "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/AlertmanagerMonitoringTests.kt"
   ],
   "testAssets": []
 }
