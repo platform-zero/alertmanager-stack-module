@@ -1,0 +1,40 @@
+---
+schemaVersion: 1
+module: "alertmanager"
+target: "observability"
+services:
+  alertmanager:
+    image: "prom/alertmanager:v0.28.1"
+    containerName: "alertmanager"
+    lifecycle: "daemon"
+    updatePolicy: "registry"
+    placement: "rootful"
+    environment:
+      NTFY_USERNAME: "${NTFY_USERNAME}"
+      NTFY_PASSWORD: "${NTFY_PASSWORD}"
+    networks:
+    - "monitoring"
+    - "caddy"
+    volumes:
+    - "alertmanager_data:/alertmanager"
+    - "./configs/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro"
+    - "./configs/alertmanager/entrypoint.sh:/entrypoint.sh:ro"
+    health:
+      test:
+      - "CMD"
+      - "wget"
+      - "--quiet"
+      - "--tries=1"
+      - "--spider"
+      - "http://localhost:9093/-/healthy"
+      interval: "30s"
+      timeout: "5s"
+      retries: 3
+      start_period: "15s"
+    command:
+    - "--storage.path=/alertmanager"
+    - "--web.external-url=https://alerts.${DOMAIN}"
+    entrypoint: "/entrypoint.sh"
+    restart: "unless-stopped"
+networks: {}
+volumes: {}
