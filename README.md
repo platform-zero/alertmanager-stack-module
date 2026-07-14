@@ -6,7 +6,7 @@
 - Lifecycle: `active`
 
 ## Owned overlays
-- `stack.compose/alertmanager.yml`
+- `stack.runtime.yaml`
 - `stack.config/alertmanager`
 
 ## Dependencies
